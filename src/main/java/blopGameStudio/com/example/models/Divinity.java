@@ -1,18 +1,12 @@
 package blopGameStudio.com.example.models;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,15 +33,12 @@ public class Divinity {
     private Integer speed;
     private Integer perception;
 
-     @ManyToOne
+    @ManyToOne
     @JoinColumn(name="kingdomId",referencedColumnName = "id")
     @JsonBackReference("kingdom-divinity")
     private Kingdom kingdom;
 
-    @OneToMany(mappedBy = "divinity",cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("divinity-character")
-    @JsonIgnore
-    private List<Character> characters;
+
 
     public Divinity() {
     }
@@ -73,28 +64,7 @@ public class Divinity {
         this.kingdom = kingdom;
     }
 
-    
 
-    public Divinity(String name, String title, String gender, String effect, Integer strength, Integer dexterity,
-            Integer constitution, Integer intelligence, Integer wisdom, Integer charisma, Integer armor,
-            Integer addiction, Integer speed, Integer perception, Kingdom kingdom, List<Character> characters) {
-        this.name = name;
-        this.title = title;
-        this.gender = gender;
-        this.effect = effect;
-        this.strength = strength;
-        this.dexterity = dexterity;
-        this.constitution = constitution;
-        this.intelligence = intelligence;
-        this.wisdom = wisdom;
-        this.charisma = charisma;
-        this.armor = armor;
-        this.addiction = addiction;
-        this.speed = speed;
-        this.perception = perception;
-        this.kingdom = kingdom;
-        this.characters = characters;
-    }
 
     public Integer getId() {
         return id;
@@ -224,13 +194,6 @@ public class Divinity {
         this.kingdom = kingdom;
     }
 
-    public List<Character> getCharacters() {
-        return characters;
-    }
-
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
-    }
 
     
 

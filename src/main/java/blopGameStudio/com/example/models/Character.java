@@ -54,47 +54,38 @@ public class Character {
 
    @ManyToOne
    @JoinColumn(name="jobId",referencedColumnName = "id")
-   @JsonBackReference("job-character")
    private Job additionalJob;
 
    @ManyToOne
    @JoinColumn(name="languageId",referencedColumnName = "id")
-   @JsonBackReference("language-character")
    private Language additionalLanguage;
 
-   @ManyToOne
+   @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name="anecdoticSecretId",referencedColumnName = "id")
-   @JsonBackReference("anecdoticSecret-character")
    private AnecdoticSecret anecdoticSecret;
 
    @ManyToOne
    @JoinColumn(name="primordialSecretId",referencedColumnName = "id")
-   @JsonBackReference("primordialSecret-character")
    private PrimordialSecret primordialSecret;
 
    @ManyToOne
    @JoinColumn(name="specializationId",referencedColumnName = "id")
-   @JsonBackReference("specialization-character")
    private Specialization specialization;
 
    @ManyToOne
    @JoinColumn(name="bornCityId",referencedColumnName = "id")
-   @JsonBackReference("bornCity-character")
    private City bornCity;
 
    @ManyToOne
    @JoinColumn(name="liveCityId",referencedColumnName = "id")
-   @JsonBackReference("liveCity-character")
    private City liveCity;
 
    @ManyToOne
    @JoinColumn(name="divinityId",referencedColumnName = "id")
-   @JsonBackReference("divinity-character")
    private Divinity divinity;
 
    @ManyToOne
    @JoinColumn(name="raceId",referencedColumnName = "id")
-   @JsonBackReference("race-character")
    private Race race;
 
 

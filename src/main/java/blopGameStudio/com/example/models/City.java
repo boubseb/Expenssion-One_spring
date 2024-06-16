@@ -1,12 +1,7 @@
 package blopGameStudio.com.example.models;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -37,15 +31,7 @@ public class City {
     @JsonBackReference("region-city")
     private Region region;
 
-    @OneToMany(mappedBy = "liveCity",cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("liveCity-character")
-    @JsonIgnore
-    private List<Character> characters;
 
-    @OneToMany(mappedBy = "bornCity",cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("bornCity-character")
-    @JsonIgnore
-    private List<Character> characters2;
 
 
     public City() {
@@ -59,16 +45,6 @@ public class City {
     }
 
     
-
-
-
-
-    public City(String name, String description, Region region, List<Character> characters) {
-        this.name = name;
-        this.description = description;
-        this.region = region;
-        this.characters = characters;
-    }
 
 
     public Integer getId() {
@@ -111,14 +87,7 @@ public class City {
     }
 
 
-    public List<Character> getCharacters() {
-        return characters;
-    }
 
-
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
-    }
 
 
     

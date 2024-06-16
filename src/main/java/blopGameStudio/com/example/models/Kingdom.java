@@ -51,15 +51,6 @@ public class Kingdom {
 
 
 
-
-
-
-
-
-
-
-
-
     public Kingdom(String name, String description, List<Divinity> divinities,
             List<Region> regions, List<BelieveContent> believeContents) {
         this.name = name;
@@ -68,16 +59,6 @@ public class Kingdom {
         this.regions = regions;
         this.believeContents = believeContents;
     }
-
-
-
-
-
-
-
-
-
-
 
 
     public Integer getId() {
@@ -120,62 +101,24 @@ public class Kingdom {
         return regions;
     }
 
-
-
     public void setRegions(List<Region> regions) {
         this.regions = regions;
     }
-
-
-
-
 
     public List<Divinity> getDivinities() {
         return divinities;
     }
 
-
-
-
-
     public void setDivinities(List<Divinity> divinities) {
         this.divinities = divinities;
     }
-
-
-
-
-
-
-
-
-
-
-
 
     public List<BelieveContent> getBelieveContents() {
         return believeContents;
     }
 
-
-
-
-
-
-
-
-
-
-
-
     public void setBelieveContents(List<BelieveContent> believeContents) {
         this.believeContents = believeContents;
     }
-
-    
-
-    
-    
-
 
 }

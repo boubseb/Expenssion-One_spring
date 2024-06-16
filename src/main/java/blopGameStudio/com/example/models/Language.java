@@ -16,6 +16,8 @@ import jakarta.persistence.Table;
 
 import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -29,11 +31,13 @@ public class Language {
     private String description;
 
     @ManyToMany(mappedBy = "languages")
+    @JsonIgnore
     private Set<Race> races;
 
-    @OneToMany(mappedBy = "additionalLanguage",cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("language-character")
-    private List<Character> characters;
+    // @OneToMany(mappedBy = "additionalLanguage",cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JsonManagedReference("language-character")
+    // @JsonIgnore
+    // private List<Character> characters;
 
     public Language() {
     }
@@ -44,13 +48,6 @@ public class Language {
     }
 
     
-
-    public Language(String name, String description, Set<Race> races, List<Character> characters) {
-        this.name = name;
-        this.description = description;
-        this.races = races;
-        this.characters = characters;
-    }
 
     // Getters and Setters
     public Integer getId() {
@@ -85,13 +82,7 @@ public class Language {
         this.description = description;
     }
 
-    public List<Character> getCharacters() {
-        return characters;
-    }
 
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
-    }
     
 
     

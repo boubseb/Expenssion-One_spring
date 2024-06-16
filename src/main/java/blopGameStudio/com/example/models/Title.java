@@ -24,11 +24,6 @@ public class Title {
     private String description;
 
 
-     @ManyToMany(mappedBy = "titles")
-    @JsonIgnore
-    private Set<Character> characters;
-    
-
     public Title(){}
     public Title(String name, String description) {
         this.name = name;
@@ -52,12 +47,7 @@ public class Title {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Set<Character> getCharacters() {
-        return characters;
-    }
-    public void setCharacters(Set<Character> characters) {
-        this.characters = characters;
-    }
+
 
     
 

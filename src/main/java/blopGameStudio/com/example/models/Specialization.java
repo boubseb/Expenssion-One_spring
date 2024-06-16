@@ -3,7 +3,6 @@ package blopGameStudio.com.example.models;
 import java.util.List;
 import java.util.Set;
 
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -11,11 +10,11 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "specializations")
@@ -46,11 +45,6 @@ public class Specialization {
     @JsonProperty("contents")
     private List<SpecializationContent> specializationContents;
 
-    @OneToMany(mappedBy = "specialization",cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("specialization-character")
-    private List<Character> characters;
-
-
 
     public Specialization(){}
 
@@ -67,17 +61,6 @@ public class Specialization {
 
     
 
-
-
-    public Specialization(String name, String imageUrl, Set<Job> jobs, List<SpecializationSkill> specializationSkill,
-            List<SpecializationContent> specializationContents, List<Character> characters) {
-        this.name = name;
-        this.imageUrl = imageUrl;
-        this.jobs = jobs;
-        this.specializationSkill = specializationSkill;
-        this.specializationContents = specializationContents;
-        this.characters = characters;
-    }
 
 
 
@@ -131,19 +114,7 @@ public class Specialization {
 
 
 
-    public List<Character> getCharacters() {
-        return characters;
-    }
-
-
-
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
-    }
-
-
-
-    
+        
 
 
     

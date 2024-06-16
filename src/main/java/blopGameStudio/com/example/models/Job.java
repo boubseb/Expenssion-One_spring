@@ -1,18 +1,13 @@
 package blopGameStudio.com.example.models;
 
-import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,11 +21,10 @@ public class Job {
     private String name;
 
     @ManyToMany(mappedBy = "jobs")
+    @JsonIgnore
     private Set<Specialization> specializations;
 
-    @OneToMany(mappedBy = "additionalJob",cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("job-character")
-    private List<Character> characters;
+
 
     public Job(){}
 
@@ -39,12 +33,6 @@ public class Job {
     }
 
     
-
-    public Job(String name, Set<Specialization> specializations, List<Character> characters) {
-        this.name = name;
-        this.specializations = specializations;
-        this.characters = characters;
-    }
 
     public Integer getId() {
         return id;
@@ -70,15 +58,7 @@ public class Job {
         this.specializations = specializations;
     }
 
-    public List<Character> getCharacters() {
-        return characters;
-    }
-
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
-    }
-
-    
+ 
 
 
 

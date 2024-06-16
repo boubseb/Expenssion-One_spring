@@ -1,12 +1,9 @@
 package blopGameStudio.com.example.models;
 
-import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -60,9 +56,6 @@ public class Race {
     )
     private Set<Language> languages;
 
-    @OneToMany(mappedBy = "race",cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("race-character")
-    private List<Character> characters;
     
     @JsonProperty("number_additional_language")
     private Integer numberAdditionalLanguage;
@@ -95,24 +88,6 @@ public class Race {
     
 
 
-
-    public Race(String name, String description, String racialTrait, Integer minAge, Integer maxAge, Integer minHeight,
-            Integer maxHeight, Integer minSpeed, Integer maxSpeed, Set<Language> languages, List<Character> characters,
-            Integer numberAdditionalLanguage, String imageUrl) {
-        this.name = name;
-        this.description = description;
-        this.racialTrait = racialTrait;
-        this.minAge = minAge;
-        this.maxAge = maxAge;
-        this.minHeight = minHeight;
-        this.maxHeight = maxHeight;
-        this.minSpeed = minSpeed;
-        this.maxSpeed = maxSpeed;
-        this.languages = languages;
-        this.characters = characters;
-        this.numberAdditionalLanguage = numberAdditionalLanguage;
-        this.imageUrl = imageUrl;
-    }
     public Integer getMaxSpeed() {
         return maxSpeed;
     }
@@ -215,12 +190,6 @@ public class Race {
 
     public void setLanguages(Set<Language> languages) {
         this.languages = languages;
-    }
-    public List<Character> getCharacters() {
-        return characters;
-    }
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
     }
 
 
