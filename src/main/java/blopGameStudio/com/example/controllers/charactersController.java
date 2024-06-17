@@ -124,15 +124,6 @@ public class charactersController {
     @GetMapping("kingdoms")
     public List<Kingdom> getKingdoms() {
        return kingdomRepository.findAll();
-    }
-
-
-
-
-
-
-
-
-    
+    }   
     
 }

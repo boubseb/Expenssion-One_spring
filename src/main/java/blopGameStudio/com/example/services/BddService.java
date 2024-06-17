@@ -27,7 +27,6 @@ import blopGameStudio.com.example.repositories.RaceRepository;
 import blopGameStudio.com.example.repositories.SpecializationRepository;
 import blopGameStudio.com.example.repositories.TitleRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 import java.io.IOException;

@@ -23,9 +23,6 @@ public class AnecdoticSecret {
         this.description = description;
     }
 
-    
-    
-
 
     public AnecdoticSecret() {
     }

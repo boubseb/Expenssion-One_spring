@@ -3,21 +3,18 @@ package blopGameStudio.com.example.models;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import java.util.Set;
-
-import blopGameStudio.com.example.models.Specialization;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+
 
 @Entity
 @Table(name = "Characters")
@@ -30,6 +27,7 @@ public class Character {
    private Integer age;
    private Integer height;
    private String biography;
+   private String name;
 
    private Integer strength;
    private Integer dexterity;
@@ -88,17 +86,23 @@ public class Character {
    @JoinColumn(name="raceId",referencedColumnName = "id")
    private Race race;
 
+   @ManyToOne
+   @JoinColumn(name="userId",referencedColumnName = "id")
+   @JsonBackReference("user-character")
+   private User user;
+
 
    
    public Character(){}
    
    
 
-   public Character(Integer age, Integer height, String biography, Integer strength, Integer dexterity,
+   public Character(String name,Integer age, Integer height, String biography, Integer strength, Integer dexterity,
          Integer constitution, Integer intelligence, Integer wisdom, Integer charisma, Integer armor, Integer addiction,
          Integer speed, Integer perception, Set<Title> titles, Job additionalJob, Language additionalLanguage,
          AnecdoticSecret anecdoticSecret, PrimordialSecret primordialSecret, Specialization specialization,
-         City bornCity, City liveCity, Divinity divinity, Race race) {
+         City bornCity, City liveCity, Divinity divinity, Race race,User user) {
+      this.name=name;
       this.age = age;
       this.height = height;
       this.biography = biography;
@@ -122,6 +126,7 @@ public class Character {
       this.liveCity = liveCity;
       this.divinity = divinity;
       this.race = race;
+      this.user=user;
    }
 
 
@@ -323,6 +328,27 @@ public class Character {
    }
 
 
+
+   public String getName() {
+      return name;
+   }
+
+
+
+   public void setName(String name) {
+      this.name = name;
+   }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+   
    
 
     
