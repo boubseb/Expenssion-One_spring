@@ -1,16 +1,6 @@
-package blopGameStudio.com.example.controllers;
+package blopGameStudio.com.example.services;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,9 +27,18 @@ import blopGameStudio.com.example.repositories.RaceRepository;
 import blopGameStudio.com.example.repositories.SpecializationRepository;
 import blopGameStudio.com.example.repositories.TitleRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 
-@RestController
-public class BddController {
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Service
+public class BddService {
 
     private final AnecdoticSecretRepository anecdoticSecretRepository;
     private final PrimordialSecretRepository primordialSecretRepository;
@@ -50,27 +49,30 @@ public class BddController {
     private final KingdomRepository kingdomRepository;
     private final TitleRepository titleRepository;
 
-    @Autowired
-    public BddController(AnecdoticSecretRepository anecdoticSecretRepository,
-    PrimordialSecretRepository primordialSecretRepository, RaceRepository raceRepository,
-    LanguageRepository languageRepository,JobRepository jobRepository,
-    SpecializationRepository specializationRepository,KingdomRepository kingdomRepository,
-    TitleRepository titleRepository) {
-            this.anecdoticSecretRepository = anecdoticSecretRepository;
-            this.primordialSecretRepository = primordialSecretRepository;
-            this.raceRepository = raceRepository;
-            this.languageRepository = languageRepository;
-            this.jobRepository=jobRepository;
-            this.specializationRepository=specializationRepository;
-            this.kingdomRepository=kingdomRepository;
-            this.titleRepository=titleRepository;
-}
 
-    @GetMapping("/insertBdd")
-    public Kingdom insertBdd() {
+    public BddService(AnecdoticSecretRepository anecdoticSecretRepository,
+                      PrimordialSecretRepository primordialSecretRepository,
+                      RaceRepository raceRepository,
+                      LanguageRepository languageRepository,
+                      JobRepository jobRepository,
+                      SpecializationRepository specializationRepository,
+                      KingdomRepository kingdomRepository,
+                      TitleRepository titleRepository) {
+        this.anecdoticSecretRepository = anecdoticSecretRepository;
+        this.primordialSecretRepository = primordialSecretRepository;
+        this.raceRepository = raceRepository;
+        this.languageRepository = languageRepository;
+        this.jobRepository = jobRepository;
+        this.specializationRepository = specializationRepository;
+        this.kingdomRepository = kingdomRepository;
+        this.titleRepository = titleRepository;
+    }
+
+    public void insertBdd() {
         try {
-            InputStream inputStream = getClass().getResourceAsStream("/data/AnecdoticSecret.json");
             ObjectMapper mapper = new ObjectMapper();
+
+            InputStream inputStream = getClass().getResourceAsStream("/data/AnecdoticSecret.json");
             AnecdoticSecret[] secretsArray = mapper.readValue(inputStream, AnecdoticSecret[].class);
             List<AnecdoticSecret> secretsList = Arrays.asList(secretsArray);
             anecdoticSecretRepository.saveAll(secretsList);
@@ -79,7 +81,6 @@ public class BddController {
             PrimordialSecret[] primordialSecretsArray = mapper.readValue(inputStream2, PrimordialSecret[].class);
             List<PrimordialSecret> primordialSecretsList = Arrays.asList(primordialSecretsArray);
             primordialSecretRepository.saveAll(primordialSecretsList);
-
 
             InputStream inputStream3 = getClass().getResourceAsStream("/data/language.json");
             Language[] languageArray = mapper.readValue(inputStream3, Language[].class);
@@ -91,13 +92,11 @@ public class BddController {
             for (Race race : racesArray) {
                 Set<Language> languages = new HashSet<>();
                 for (Language language : race.getLanguages()) {
-                    // Check if the language already exists in the database
                     Language existingLanguage = languageRepository.findByName(language.getName());
                     if (existingLanguage != null) {
                         languages.add(existingLanguage);
                     } else {
-                        // Save new language to the database
-                        Language newLanguage = new Language(language.getName(),language.getDescription());
+                        Language newLanguage = new Language(language.getName(), language.getDescription());
                         languages.add(languageRepository.save(newLanguage));
                     }
                 }
@@ -110,60 +109,45 @@ public class BddController {
             List<Job> jobList = Arrays.asList(jobArray);
             jobRepository.saveAll(jobList);
 
-
             InputStream inputStream6 = getClass().getResourceAsStream("/data/specializations.json");
             Specialization[] specializationArray = mapper.readValue(inputStream6, Specialization[].class);
             for (Specialization specialization : specializationArray) {
                 Set<Job> jobs = new HashSet<>();
                 for (Job job : specialization.getJobs()) {
-                    // Check if the language already exists in the database
                     Job existingJob = jobRepository.findByName(job.getName());
                     if (existingJob != null) {
                         jobs.add(existingJob);
                     } else {
-                        // Save new job  to the database
                         Job newJob = new Job(job.getName());
                         jobs.add(jobRepository.save(newJob));
                     }
                 }
                 specialization.setJobs(jobs);
-                   for (SpecializationSkill skill : specialization.getSpecializationSkill()) {
+                for (SpecializationSkill skill : specialization.getSpecializationSkill()) {
                     skill.setSpecialization(specialization);
                 }
-
                 for (SpecializationContent content : specialization.getSpecializationContents()) {
                     content.setSpecialization(specialization);
                 }
-                
-
                 specializationRepository.save(specialization);
-
-
             }
-
 
             InputStream inputStream7 = getClass().getResourceAsStream("/data/kingdoms.json");
             Kingdom[] kingdomArray = mapper.readValue(inputStream7, Kingdom[].class);
             for (Kingdom kingdom : kingdomArray) {
-        
-    
                 for (Region region : kingdom.getRegions()) {
                     region.setKingdom(kingdom);
-                    for(City city :region.getCities()){
+                    for (City city : region.getCities()) {
                         city.setRegion(region);
                     }
                 }
-
                 for (Divinity divinity : kingdom.getDivinities()) {
                     divinity.setKingdom(kingdom);
                 }
-                for(BelieveContent believeContent: kingdom.getBelieveContents()){
+                for (BelieveContent believeContent : kingdom.getBelieveContents()) {
                     believeContent.setKingdom(kingdom);
                 }
-
                 kingdomRepository.save(kingdom);
-
-
             }
 
             InputStream inputStream8 = getClass().getResourceAsStream("/data/titles.json");
@@ -171,17 +155,11 @@ public class BddController {
             List<Title> titleList = Arrays.asList(titleArray);
             titleRepository.saveAll(titleList);
 
-
-            return kingdomRepository.getReferenceById(1);
-
-
-
+           
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+
     }
-
-
 }
