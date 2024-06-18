@@ -7,8 +7,7 @@
       "max_age": 90,
       "min_height": 150,
       "max_height": 190,
-      "min_speed": 6,
-      "max_speed": 6,
+      "speed": 6,
       "languages": [
         {"name":"Commun","description":"langue que tout le monde parle, générale"}
     ],
@@ -23,8 +22,7 @@
       "max_age": 120,
       "min_height": 130,
       "max_height": 150,
-      "min_speed": 5,
-      "max_speed": 5,
+      "speed": 5,
       "languages": [
         {"name":"Nain","description":"nain"}
     ],
@@ -39,8 +37,7 @@
       "max_age": 110,
       "min_height": 90,
       "max_height": 210,
-      "min_speed": 5,
-      "max_speed": 9,
+      "speed": 7,
       "languages": [
         {"name":"Commun","description":"langue que tout le monde parle, générale"},
         {"name":"Bestial","description":"langue subtile comprise par les animaux"}
@@ -56,8 +53,7 @@
       "max_age": 120,
       "min_height": 110,
       "max_height": 150,
-      "min_speed": 5,
-      "max_speed": 5,
+      "speed": 5,
       "languages": [
         {"name":"Commun","description":"langue que tout le monde parle, générale"},
         {"name":"Gobelin nouveau","description":"mélange entre Gobelin ancien et certains mots communs"}
@@ -73,8 +69,7 @@
       "max_age": 90,
       "min_height": 90,
       "max_height": 120,
-      "min_speed": 6,
-      "max_speed": 6,
+      "speed": 6,
       "languages": [
         {"name":"Commun","description":"langue que tout le monde parle, générale"},
         {"name":"Gobelin ancien","description":"la langue originelle des Gobelins"},
@@ -91,8 +86,7 @@
       "max_age": 135,
       "min_height": 160,
       "max_height": 190,
-      "min_speed": 7,
-      "max_speed": 7,
+      "speed": 7,
       "languages": [
         {"name":"Commun","description":"langue que tout le monde parle, générale"},
         {"name":"Féérique","description":"langue des fées farceuses"},
@@ -110,8 +104,7 @@
       "max_age": 90,
       "min_height": 180,
       "max_height": 230,
-      "min_speed": 6,
-      "max_speed": 6,
+      "speed": 6,
       "languages": [
         {"name":"Commun","description":"langue que tout le monde parle, générale"}
     ],
@@ -126,8 +119,7 @@
       "max_age": 95,
       "min_height": 130,
       "max_height": 180,
-      "min_speed": 7,
-      "max_speed": 7,
+      "speed": 7,
       "languages": [
         {"name":"Commun","description":"langue que tout le monde parle, générale"},
         {"name":"Bestial","description":"langue subtile comprise par les animaux"}
@@ -143,8 +135,7 @@
       "max_age": 90,
       "min_height": 150,
       "max_height": 200,
-      "min_speed": 9,
-      "max_speed": 9,
+      "speed": 9,
       "languages": [
         {"name":"Commun","description":"langue que tout le monde parle, générale"},
         {"name":"Angélique","description":"angue des anges"}

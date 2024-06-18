@@ -2,6 +2,7 @@ package blopGameStudio.com.example.models;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -12,6 +13,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -24,18 +28,24 @@ public class User {
     private String id;
     @Column(unique=true,updatable = false)
     private String pseudo;
-    private String lastnname;
+    private String lastname;
     private String firstname;
     private String password;
-    @Column(unique=true,updatable = true)
+        private Date dateOfBirth;
+    @Column(unique=true)
     private String email;
     private String profilPictureUrl=null;
     private String biography=null;
-    private Date dateOfBirth;
-    
-    //private Set<User> friends=null;
-    
 
+
+     @ManyToMany
+    @JoinTable(
+        name = "user_friends",
+        joinColumns = @JoinColumn(name = "userId"),
+        inverseJoinColumns = @JoinColumn(name = "friendId")
+    )
+    private Set<User> friends=null;
+    
 
     private Boolean isNewletters=true;
     private Boolean isPublic=true;
@@ -48,11 +58,11 @@ public class User {
     
 
 
-    public User(Date dateOfBirth, String email, String firstname, String lastnname, String password, String pseudo) {
+    public User(Date dateOfBirth, String email, String firstname, String lastname, String password, String pseudo) {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.firstname = firstname;
-        this.lastnname = lastnname;
+        this.lastname = lastname;
         this.password = password;
         this.pseudo = pseudo;
     }
@@ -76,12 +86,12 @@ public class User {
         this.pseudo = pseudo;
     }
 
-    public String getLastnname() {
-        return lastnname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastnname(String lastnname) {
-        this.lastnname = lastnname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getFirstname() {
@@ -132,13 +142,13 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    // public Set<User> getFriends() {
-    //     return friends;
-    // }
+    public Set<User> getFriends() {
+        return friends;
+    }
 
-    // public void setFriends(Set<User> friends) {
-    //     this.friends = friends;
-    // }
+    public void setFriends(Set<User> friends) {
+        this.friends = friends;
+    }
 
 
 
@@ -158,11 +168,11 @@ public class User {
         this.isPublic = isPublic;
     }
 
-    public List<Character> getCharacter() {
+    public List<Character> getCharacters() {
         return characters;
     }
 
-    public void setCharacter(List<Character> characters) {
+    public void setCharacters(List<Character> characters) {
         this.characters = characters;
     }
 

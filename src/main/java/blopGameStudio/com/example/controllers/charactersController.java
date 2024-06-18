@@ -5,10 +5,12 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
@@ -23,6 +25,7 @@ import blopGameStudio.com.example.models.PrimordialSecret;
 import blopGameStudio.com.example.models.Race;
 import blopGameStudio.com.example.models.Specialization;
 import blopGameStudio.com.example.models.Title;
+import blopGameStudio.com.example.models.User;
 import blopGameStudio.com.example.repositories.AnecdoticSecretRepository;
 import blopGameStudio.com.example.repositories.CharacterRepository;
 import blopGameStudio.com.example.repositories.JobRepository;
@@ -46,6 +49,10 @@ public class charactersController {
     private final JobRepository jobRepository;
     private final KingdomRepository kingdomRepository;
     private final TitleRepository titleRepository;
+
+            @Value("${myApp.BearerHeader}")
+        private  String BearerPrefix;
+
     
 
 
@@ -67,12 +74,16 @@ public class charactersController {
 
 
     @PutMapping("/addCharacter")
-    public void addCharacter() throws StreamReadException, DatabindException, IOException {
+    public void addCharacter(@RequestHeader("Authorization") String BearerHeader) throws StreamReadException, DatabindException, IOException {
 
 
+         String userUUID=BearerHeader.substring(BearerPrefix.length());
+         User user=new User();
+         user.setId(userUUID);
         InputStream inputStream = getClass().getResourceAsStream("/data/character.json");
         ObjectMapper mapper = new ObjectMapper();
         Character character = mapper.readValue(inputStream, Character.class);
+        character.setUser(user);
         characterRepository.save(character);
        
     }

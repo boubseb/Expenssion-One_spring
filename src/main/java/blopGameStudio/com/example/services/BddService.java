@@ -1,5 +1,12 @@
 package blopGameStudio.com.example.services;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,15 +33,6 @@ import blopGameStudio.com.example.repositories.PrimordialSecretRepository;
 import blopGameStudio.com.example.repositories.RaceRepository;
 import blopGameStudio.com.example.repositories.SpecializationRepository;
 import blopGameStudio.com.example.repositories.TitleRepository;
-
-
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Service
 public class BddService {
@@ -75,6 +73,13 @@ public class BddService {
             AnecdoticSecret[] secretsArray = mapper.readValue(inputStream, AnecdoticSecret[].class);
             List<AnecdoticSecret> secretsList = Arrays.asList(secretsArray);
             anecdoticSecretRepository.saveAll(secretsList);
+
+
+
+
+
+
+
 
             InputStream inputStream2 = getClass().getResourceAsStream("/data/primordialSecret.json");
             PrimordialSecret[] primordialSecretsArray = mapper.readValue(inputStream2, PrimordialSecret[].class);

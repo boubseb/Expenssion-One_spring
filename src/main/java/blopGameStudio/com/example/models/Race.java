@@ -41,11 +41,10 @@ public class Race {
     @JsonProperty("max_height")
     private Integer maxHeight;
 
-    @JsonProperty("min_speed")
-    private Integer minSpeed;
+    @JsonProperty("speed")
+    private Integer speed;
 
-    @JsonProperty("max_speed")
-    private Integer maxSpeed;
+
 
 
     @ManyToMany
@@ -68,7 +67,7 @@ public class Race {
 
     
     public Race(String name, String description, String racialTrait, Integer minAge, Integer maxAge, Integer minHeight,
-            Integer maxHeight, Integer minSpeed, Integer maxSpeed, Set<Language> languages,
+            Integer maxHeight,  Integer speed, Set<Language> languages,
             Integer numberAdditionalLanguage, String imageUrl) {
         this.name = name;
         this.description = description;
@@ -77,8 +76,7 @@ public class Race {
         this.maxAge = maxAge;
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
-        this.minSpeed = minSpeed;
-        this.maxSpeed = maxSpeed;
+        this.speed = speed;
         this.languages = languages;
         this.numberAdditionalLanguage = numberAdditionalLanguage;
         this.imageUrl = imageUrl;
@@ -88,15 +86,7 @@ public class Race {
     
 
 
-    public Integer getMaxSpeed() {
-        return maxSpeed;
-    }
 
-
-
-    public void setMaxSpeed(Integer maxSpeed) {
-        this.maxSpeed = maxSpeed;
-    }
 
 
 
@@ -173,13 +163,6 @@ public class Race {
     public void setMaxHeight(Integer maxHeight) {
         this.maxHeight = maxHeight;
     }
-    public Integer getMinSpeed() {
-        return minSpeed;
-    }
-    public void setMinSpeed(Integer speed) {
-        this.minSpeed = speed;
-    }
-
 
 
     public Set<Language> getLanguages() {
@@ -191,6 +174,16 @@ public class Race {
     public void setLanguages(Set<Language> languages) {
         this.languages = languages;
     }
+
+    public Integer getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Integer speed) {
+        this.speed = speed;
+    }
+
+    
 
 
     
